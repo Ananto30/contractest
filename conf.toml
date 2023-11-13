@@ -1,0 +1,50 @@
+[proxy]
+host = "localhost"
+port = 3000
+server_base_url = "https://ask-hadith.vercel.app"
+save_to_folder = "./contracts"
+
+[test_service]
+load_from_folder = "./contracts"
+server_base_url = "http://localhost:7777"
+
+[body_comparison]
+## these fields are ignored in all responses
+# ignore_fields = ["id", "created_at", "updated_at"]
+
+## the actual response body must be same as expected body regardless of the order of keys
+strict_match = false
+
+## the actual response body must have same values as expected body
+value_match = true
+
+## the actual response body must be structurally same as expected body
+structure_match = true
+
+## the arrays in actual response body must have same order as expected body
+array_order_match = true
+
+## the arrays in actual response body must have same length as expected body
+array_length_match = false
+
+
+## these fields are ignored in responses for specific paths
+[body_comparison.ignore_fields_by_path]
+# "/login" = [
+#     "password",
+#     "email",
+# ]
+
+
+[headers_comparison]
+## these headers are ignored in all responses
+ignore_headers = [
+    "date",
+    "server",
+    "content-length",
+    "connection",
+    "x-powered-by",
+]
+
+## these cookies are ignored in all responses
+ignore_cookies = ["expires"]
